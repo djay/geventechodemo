@@ -1,6 +1,7 @@
 from socket import *
 import threading
 import urllib
+from urllib import urlencode
 
 def echo(socket, addr):
     print '...connected from:', addr
@@ -8,7 +9,7 @@ def echo(socket, addr):
     while True:
         line = fileobj.readline()
         if not line: break
-        line = urllib.urlopen("http://isithackday.com/arrpi.php?text="+line).read()
+        line = urllib.urlopen("http://isithackday.com/arrpi.php?"+urlencode({'text':line})).read()
         fileobj.write("echo: %s\n"%line)
         fileobj.flush()
 

@@ -1,5 +1,6 @@
 import urllib2
 import httplib
+from urllib import urlencode
 
 class gevent_HTTPConnection(httplib.HTTPConnection):
     def connect(self):
@@ -22,7 +23,7 @@ def echo(socket, addr):
     while True:
         line = fileobj.readline()
         if not line: break
-        line = gevent_url_fetch("http://isithackday.com/arrpi.php?text="+line).read()
+        line = gevent_url_fetch("http://isithackday.com/arrpi.php?"+urlencode({'text':line})).read()
         fileobj.write("echo: %s\n"%line)
         fileobj.flush()
 
