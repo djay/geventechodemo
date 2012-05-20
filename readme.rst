@@ -34,7 +34,9 @@ e.g. StacklessPython, Fibra, Cogen, Greenlet, Gevent, Eventlet, Circuits, Twiste
 Parallel Python, pprocess, pysage, pypes, diesel, Chiral, tornado
 
 Essentially what they do is run everything in a single thread but instead work with the
-operating system to switch with of your code is worked on
+operating system to switch which of your code is worked on. If there if gets to an operation
+that is going to block such as a read, write or sleep, the switching will take place. If
+no blocking takes place then there will be no switching between code, unlike threads.
 
 
 Overhead
@@ -44,7 +46,9 @@ Every thread means context switches occur which means a certain amount of work n
 save of the current thread and then reinstate the previous state of the next thread. Below is an attempt
 to measure that overhead.
 
-.. image:: https://github.com/zacharyvoase/gevent-threading-comparison
+.. image:: https://docs.google.com/a/zacharyvoase.com/spreadsheet/oimg?key=0AsuBtR4mF_kwdC00cTB3ZEgxbEVwRWJ0N19ER3ZPb0E&amp;oid=1&amp;zx=dahf936jcc15
+
+https://github.com/zacharyvoase/gevent-threading-comparison
 
 This is for gevent but the result would be similar for any async io framework. The more the threads
 the more the overhead becomes a problem.
